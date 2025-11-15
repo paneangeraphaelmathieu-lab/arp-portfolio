@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARP Solutions - Ange Raphaël PANE</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(to bottom right, #111827, #1f2937, #111827);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        nav {
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+            nav.scrolled {
+                background: rgba(17, 24, 39, 0.95);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+            .nav-menu a {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s ease;
+                cursor: pointer;
+                text-transform: capitalize;
+            }
+
+                .nav-menu a:hover, .nav-menu a.active {
+                    color: #60a5fa;
+                }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: #1f2937;
+            border-top: 1px solid #374151;
+            padding: 1rem;
+        }
+
+            .mobile-menu.active {
+                display: block;
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 0.5rem 0;
+                color: white;
+                text-decoration: none;
+                text-transform: capitalize;
+            }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem 2rem;
+        }
+
+            .hero h1 {
+                font-size: clamp(2.5rem, 7vw, 4.5rem);
+                font-weight: bold;
+                margin-bottom: 1.5rem;
+                background: linear-gradient(to right, #60a5fa, #a78bfa, #ec4899);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: fadeIn 1s ease;
+            }
+
+            .hero h2 {
+                font-size: clamp(1.25rem, 3vw, 1.875rem);
+                color: #d1d5db;
+                margin-bottom: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+                color: #9ca3af;
+                max-width: 42rem;
+                margin: 0 auto 3rem;
+            }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            border: none;
+            color: white;
+        }
+
+            .btn-primary:hover {
+                box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+                transform: scale(1.05);
+            }
+
+        .btn-secondary {
+            border: 2px solid #60a5fa;
+            background: transparent;
+            color: white;
+        }
+
+            .btn-secondary:hover {
+                background: rgba(96, 165, 250, 0.1);
+            }
+
+        .chevron {
+            margin-top: 4rem;
+            animation: bounce 2s infinite;
+            color: #60a5fa;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(to right, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            font-size: 1.125rem;
+            color: #d1d5db;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+            .social-links a {
+                padding: 0.75rem;
+                background: #1f2937;
+                border-radius: 0.5rem;
+                color: white;
+                text-decoration: none;
+                transition: background 0.3s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+                .social-links a:hover {
+                    background: #374151;
+                }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+            .service-card:hover {
+                transform: scale(1.05);
+            }
+
+            .service-card.web {
+                background: linear-gradient(to bottom right, #2563eb, #1e40af);
+            }
+
+            .service-card.mobile {
+                background: linear-gradient(to bottom right, #9333ea, #7e22ce);
+            }
+
+            .service-card.solutions {
+                background: linear-gradient(to bottom right, #db2777, #be185d);
+                grid-column: span 2;
+            }
+
+            .service-card svg {
+                width: 48px;
+                height: 48px;
+                margin: 0 auto 1rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+        .skills-bg {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 1rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-weight: 600;
+        }
+
+        .skill-percent {
+            color: #60a5fa;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 0.75rem;
+            background: #374151;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            border-radius: 9999px;
+            transition: width 1s ease;
+        }
+
+        .skill-category {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-top: 0.5rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(to bottom right, #1f2937, #111827);
+            border: 1px solid #374151;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+            .project-card:hover {
+                border-color: #3b82f6;
+                transform: scale(1.05);
+            }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+            .project-header h3 {
+                font-size: 1.25rem;
+            }
+
+        .project-card p {
+            color: #9ca3af;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 9999px;
+            font-size: 0.875rem;
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+            .contact-content p {
+                font-size: 1.25rem;
+                color: #d1d5db;
+                margin-bottom: 3rem;
+            }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            color: white;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+            .contact-link:hover {
+                box-shadow: 0 0 30px rgba(147, 51, 234, 0.5);
+            }
+
+        footer {
+            padding: 2rem;
+            border-top: 1px solid #374151;
+            text-align: center;
+            color: #9ca3af;
+        }
+
+            footer p {
+                margin: 0.5rem 0;
+            }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card.solutions {
+                grid-column: span 1;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">ARP Solutions</div>
+            <ul class="nav-menu">
+                <li><a href="#accueil" onclick="scrollToSection('accueil')" class="active">Accueil</a></li>
+                <li><a href="#apropos" onclick="scrollToSection('apropos')">À propos</a></li>
+                <li><a href="#competences" onclick="scrollToSection('competences')">Compétences</a></li>
+                <li><a href="#projets" onclick="scrollToSection('projets')">Projets</a></li>
+                <li><a href="#contact" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#accueil" onclick="scrollToSection('accueil')">Accueil</a>
+            <a href="#apropos" onclick="scrollToSection('apropos')">À propos</a>
+            <a href="#competences" onclick="scrollToSection('competences')">Compétences</a>
+            <a href="#projets" onclick="scrollToSection('projets')">Projets</a>
+            <a href="#contact" onclick="scrollToSection('contact')">Contact</a>
+        </div>
+    </nav>
+
+    <section id="accueil" class="hero">
+        <div>
+            <h1>Ange Raphaël PANE</h1>
+            <h2>Développeur Web & Mobile Junior</h2>
+            <p>Passionné par la création d'expériences numériques innovantes et performantes</p>
+            <div class="hero-buttons">
+                <a href="#projets" class="btn btn-primary" onclick="scrollToSection('projets')">Voir mes projets</a>
+                <a href="#contact" class="btn btn-secondary" onclick="scrollToSection('contact')">Me contacter</a>
+            </div>
+            <div class="chevron">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <section id="apropos">
+        <div class="container">
+            <h2 class="section-title">À propos de moi</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Développeur web et mobile junior passionné, je transforme des idées en applications fonctionnelles et esthétiques. Mon parcours m'a permis d'acquérir une solide expertise en développement frontend et mobile.</p>
+                    <p>Je maîtrise les technologies modernes comme React, React Native et Flutter, et je suis constamment à la recherche de nouveaux défis pour affiner mes compétences.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="GitHub">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="mailto:contact@arp-solutions.com" aria-label="Email">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card web">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="16 18 22 12 16 6"></polyline>
+                            <polyline points="8 6 2 12 8 18"></polyline>
+                        </svg>
+                        <h3>Web</h3>
+                        <p>Développement</p>
+                    </div>
+                    <div class="service-card mobile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                        </svg>
+                        <h3>Mobile</h3>
+                        <p>Applications</p>
+                    </div>
+                    <div class="service-card solutions">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                        <h3>Solutions Complètes</h3>
+                        <p>De l'idée au déploiement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="competences" class="skills-bg">
+        <div class="container">
+            <h2 class="section-title">Compétences</h2>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+    </section>
+
+    <section id="projets">
+        <div class="container">
+            <h2 class="section-title">Mes Projets</h2>
+            <div class="projects-grid" id="projectsGrid"></div>
+        </div>
+    </section>
+
+    <section id="contact" class="skills-bg">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Travaillons Ensemble</h2>
+                <p>Vous avez un projet en tête ? Je serais ravi d'en discuter avec vous.</p>
+                <div class="contact-links">
+                    <a href="mailto:contact@arp-solutions.com" class="contact-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        paneangeraphaelmathieu@gmail.com
+                    </a>
+                    <a href="tel:+2250787648264" class="contact-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        +225 07 87 64 82 64
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 ARP Solutions - Ange Raphaël PANE. Tous droits réservés.</p>
+        <p>arp-solutions.com</p>
+    </footer>
+
+    <script>
+        const skills = [
+            { name: "HTML/CSS", level: 90, category: "Frontend" },
+            { name: "JavaScript", level: 85, category: "Frontend" },
+            { name: "React.js", level: 80, category: "Frontend" },
+            { name: "React Native", level: 75, category: "Mobile" },
+            { name: "Flutter", level: 70, category: "Mobile" },
+            { name: "Node.js", level: 75, category: "Backend" },
+            { name: "MongoDB", level: 70, category: "Backend" },
+            { name: "Git/GitHub", level: 85, category: "Outils" }
+        ];
+
+        const projects = [
+            {
+                title: "Application E-Commerce Mobile",
+                description: "Application mobile cross-platform développée avec React Native, intégrant un système de paiement sécurisé et une gestion de panier avancée.",
+                tech: ["React Native", "Firebase", "Stripe"]
+            },
+            {
+                title: "Plateforme de Gestion",
+                description: "Dashboard administratif moderne avec authentification, gestion d'utilisateurs et visualisation de données en temps réel.",
+                tech: ["React", "Node.js", "MongoDB"]
+            },
+            {
+                title: "Site Vitrine Responsive",
+                description: "Site web moderne et entièrement responsive pour une entreprise locale, optimisé SEO avec performances exceptionnelles.",
+                tech: ["HTML5", "CSS3", "JavaScript"]
+            },
+            {
+                title: "Application de Suivi Fitness",
+                description: "Application mobile permettant de suivre ses activités sportives avec graphiques de progression et notifications push.",
+                tech: ["Flutter", "Dart", "SQLite"]
+            }
+        ];
+
+        const skillsGrid = document.getElementById('skillsGrid');
+        skills.forEach(skill => {
+            const skillCard = document.createElement('div');
+            skillCard.className = 'skill-card';
+            skillCard.innerHTML = `
+                <div class="skill-header">
+                    <span class="skill-name">${skill.name}</span>
+                    <span class="skill-percent">${skill.level}%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 0%;" data-width="${skill.level}"></div>
+                </div>
+                <p class="skill-category">${skill.category}</p>
+            `;
+            skillsGrid.appendChild(skillCard);
+        });
+
+        const projectsGrid = document.getElementById('projectsGrid');
+        projects.forEach(project => {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'project-card';
+            projectCard.innerHTML = `
+                <div class="project-header">
+                    <h3>${project.title}</h3>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </div>
+                <p>${project.description}</p>
+                <div class="tech-tags">
+                    ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                </div>
+            `;
+            projectsGrid.appendChild(projectCard);
+        });
+
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('mobileMenu').classList.remove('active');
+                updateActiveNav(id);
+            }
+        }
+
+        function updateActiveNav(id) {
+            document.querySelectorAll('.nav-menu a, .mobile-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.skill-progress');
+                    progressBars.forEach(bar => {
+                        setTimeout(() => {
+                            bar.style.width = bar.dataset.width + '%';
+                        }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        observer.observe(document.getElementById('competences'));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        });
+    </script>
+</body>
+</html>
